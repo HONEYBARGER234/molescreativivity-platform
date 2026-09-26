@@ -3,137 +3,558 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Create Account | Molescreativivity</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .auth-wrapper {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+            padding: 70px 0;
+        }
+
+        .auth-intro h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .auth-intro p {
+            font-size: 18px;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        .signup-benefits {
+            margin-top: 30px;
+        }
+
+        .signup-benefit {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .signup-benefit-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.08);
+            font-size: 20px;
+        }
+
+        .auth-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .auth-card h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .auth-card > p {
+            opacity: 0.7;
+            margin-bottom: 30px;
+        }
+
+        .auth-form {
+            width: 100%;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+            color: inherit;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #ffffff;
+        }
+
+        .password-box {
+            position: relative;
+        }
+
+        .password-box input {
+            padding-right: 50px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: inherit;
+            font-size: 16px;
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 20px 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .terms input {
+            margin-top: 4px;
+        }
+
+        .auth-submit {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0;
+            opacity: 0.5;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: currentColor;
+        }
+
+        .login-prompt {
+            text-align: center;
+        }
+
+        .auth-notice {
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            font-size: 13px;
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 800px) {
+            .auth-wrapper {
+                grid-template-columns: 1fr;
+                gap: 35px;
+                padding: 40px 0;
+            }
+
+            .auth-intro h1 {
+                font-size: 36px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .auth-card {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-    <a href="index.html" class="logo">Molescreativivity</a>
+<div class="auth-page">
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="login.html">Login</a>
-    </nav>
-</header>
+    <!-- ================= HEADER ================= -->
 
-<main class="auth-page">
+    <header class="header">
+        <div class="container nav-container">
 
-    <div class="auth-container">
+            <a href="index.html" class="logo">
+                <span class="logo-mark">M</span>
+                <span>Molescreativivity</span>
+            </a>
 
-        <h1>Create Account</h1>
-        <p>Join the Molescreativivity platform.</p>
+            <nav class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="marketplace.html">Marketplace</a>
+                <a href="services.html">Services</a>
+                <a href="community.html">Community</a>
+                <a href="support.html">Support</a>
+                <a href="login.html" class="btn">Login</a>
+            </nav>
 
-        <form onsubmit="registerDemo(event)">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-            <div class="form-row">
+        </div>
+    </header>
 
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        placeholder="First name"
-                        required
-                    >
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="auth-wrapper">
+
+        <!-- LEFT SIDE -->
+
+        <section class="auth-intro">
+
+            <h1>
+                Create your
+                <span>Molescreativivity</span>
+                account.
+            </h1>
+
+            <p>
+                Join the Molescreativivity platform and access
+                digital services, creative tools, marketplace
+                products and more.
+            </p>
+
+            <div class="signup-benefits">
+
+                <div class="signup-benefit">
+                    <div class="signup-benefit-icon">🎨</div>
+                    <div>
+                        <strong>Creative Services</strong>
+                        <p>Access professional digital services.</p>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        placeholder="Last name"
-                        required
-                    >
+                <div class="signup-benefit">
+                    <div class="signup-benefit-icon">🛒</div>
+                    <div>
+                        <strong>Marketplace</strong>
+                        <p>Explore digital products and resources.</p>
+                    </div>
+                </div>
+
+                <div class="signup-benefit">
+                    <div class="signup-benefit-icon">💰</div>
+                    <div>
+                        <strong>Wallet & Transactions</strong>
+                        <p>Manage your platform transactions.</p>
+                    </div>
+                </div>
+
+                <div class="signup-benefit">
+                    <div class="signup-benefit-icon">👥</div>
+                    <div>
+                        <strong>Community</strong>
+                        <p>Connect with other creators and users.</p>
+                    </div>
                 </div>
 
             </div>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    required
+        </section>
+
+
+        <!-- RIGHT SIDE -->
+
+        <section class="auth-card">
+
+            <h2>Create Account</h2>
+
+            <p>
+                Create your account to get started.
+            </p>
+
+            <form
+                class="auth-form"
+                onsubmit="return registerDemo(event)"
+            >
+
+                <!-- NAME -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="firstName">
+                            First Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="firstName"
+                            placeholder="First name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">
+                            Last Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="lastName"
+                            placeholder="Last name"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Choose a username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create a password"
+                            minlength="6"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="toggleRegisterPassword('password')"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            minlength="6"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="toggleRegisterPassword('confirmPassword')"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <div class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required
+                    >
+
+                    <label for="terms">
+                        I agree to the platform's terms and
+                        conditions.
+                    </label>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="auth-submit"
                 >
+                    Create My Account
+                </button>
+
+            </form>
+
+
+            <!-- DIVIDER -->
+
+            <div class="auth-divider">
+                <span>OR</span>
             </div>
 
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    placeholder="Choose a username"
-                    required
-                >
+
+            <!-- LOGIN -->
+
+            <div class="login-prompt">
+
+                <p>
+                    Already have an account?
+                    <a href="login.html">
+                        Login
+                    </a>
+                </p>
+
             </div>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Create a password"
-                    required
-                    minlength="6"
-                >
+
+            <!-- NOTICE -->
+
+            <div class="auth-notice">
+
+                Your account information is securely
+                handled through our authentication system.
+
             </div>
 
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    placeholder="Confirm your password"
-                    required
-                    minlength="6"
-                >
-            </div>
+        </section>
 
-            <label class="checkbox">
-                <input
-                    type="checkbox"
-                    id="terms"
-                    required
-                >
-                <span>I agree to the terms and conditions.</span>
-            </label>
-
-            <button type="submit" class="btn">
-                Create Account
-            </button>
-
-        </form>
-
-        <p class="auth-link">
-            Already have an account?
-            <a href="login.html">Login</a>
-        </p>
-
-    </div>
-
-</main>
-
-<footer>
-    <p>© 2026 Molescreativivity. All rights reserved.</p>
-</footer>
+    </main>
 
 
-<!-- Supabase -->
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <p>
+                © 2026 Molescreativivity. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+</div>
+
+
+<!-- ================= SUPABASE ================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- Main JavaScript -->
+<!-- MAIN JAVASCRIPT -->
+
 <script src="js/script.js"></script>
+
+
+<!-- ================= REGISTER FUNCTIONS ================= -->
+
+<script>
+
+function toggleRegisterPassword(id) {
+
+    const input = document.getElementById(id);
+
+    if (input.type === "password") {
+
+        input.type = "text";
+
+    } else {
+
+        input.type = "password";
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>
