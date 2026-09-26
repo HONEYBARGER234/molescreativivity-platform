@@ -3,52 +3,68 @@
 // MAIN JAVASCRIPT
 // ========================================
 
-// ---------- SUPABASE ----------
+// ================= SUPABASE =================
+
 const SUPABASE_URL = "https://mbhhocnhydwcdxghfnry.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_LR2biq1vtXsFOyx-AWMLXA_OTUq3DKn";
 
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
 
+let supabaseClient = null;
 
-// ---------- PAGE READY ----------
+// Only initialize Supabase if the library has loaded
+if (window.supabase && SUPABASE_KEY !== "PASTE_YOUR_PUBLISHABLE_KEY_HERE") {
+    supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+}
+
+// ================= PAGE READY =================
+
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Molescreativivity Platform loaded");
 
-    // Mobile menu
+    // Existing mobile menu
     const menuButton = document.querySelector(".menu-btn");
     const navMenu = document.querySelector(".nav-menu");
 
     if (menuButton && navMenu) {
+
         menuButton.addEventListener("click", function () {
             navMenu.classList.toggle("active");
         });
+
     }
 
-    // Close mobile menu after clicking a link
+    // Close menu after clicking navigation links
     const navLinks = document.querySelectorAll(".nav-menu a");
 
     navLinks.forEach(function (link) {
+
         link.addEventListener("click", function () {
+
             if (navMenu) {
                 navMenu.classList.remove("active");
             }
+
         });
+
     });
+
+    displayUserEmail();
 
 });
 
 
-// ========================================
-// SUPABASE AUTHENTICATION
-// ========================================
+// ================= GET CURRENT USER =================
 
-// Get logged-in user
 async function getCurrentUser() {
+
+    if (!supabaseClient) {
+        return null;
+    }
 
     const {
         data: { user },
@@ -56,7 +72,9 @@ async function getCurrentUser() {
     } = await supabaseClient.auth.getUser();
 
     if (error) {
+
         console.error("User error:", error);
+
         return null;
     }
 
@@ -64,13 +82,16 @@ async function getCurrentUser() {
 }
 
 
-// Check if user is logged in
+// ================= CHECK LOGIN =================
+
 async function checkLogin() {
 
     const user = await getCurrentUser();
 
     if (!user) {
+
         window.location.href = "login.html";
+
         return null;
     }
 
@@ -78,13 +99,24 @@ async function checkLogin() {
 }
 
 
-// Logout
+// ================= LOGOUT =================
+
 async function logoutUser() {
 
-    const { error } = await supabaseClient.auth.signOut();
+    if (!supabaseClient) {
+
+        window.location.href = "login.html";
+
+        return;
+    }
+
+    const { error } =
+        await supabaseClient.auth.signOut();
 
     if (error) {
+
         alert(error.message);
+
         return;
     }
 
@@ -92,44 +124,27 @@ async function logoutUser() {
 }
 
 
-// ========================================
-// AUTH STATE
-// ========================================
-
-supabaseClient.auth.onAuthStateChange(function (event, session) {
-
-    console.log("Authentication:", event);
-
-    if (session) {
-        console.log("Logged in:", session.user.email);
-    } else {
-        console.log("Not logged in");
-    }
-
-});
-
-
-// ========================================
-// LOGOUT BUTTONS
-// ========================================
+// ================= LOGOUT BUTTONS =================
 
 document.addEventListener("click", function (event) {
 
-    const logoutButton = event.target.closest(
-        ".logout-btn, [data-action='logout']"
-    );
+    const logoutButton =
+        event.target.closest(
+            ".logout-btn, [data-action='logout']"
+        );
 
-    if (logoutButton) {
-        event.preventDefault();
-        logoutUser();
+    if (!logoutButton) {
+        return;
     }
+
+    event.preventDefault();
+
+    logoutUser();
 
 });
 
 
-// ========================================
-// REGISTER
-// ========================================
+// ================= REGISTER =================
 
 async function registerUser(
     firstName,
@@ -139,20 +154,32 @@ async function registerUser(
     password
 ) {
 
-    const { data, error } = await supabaseClient.auth.signUp({
+    if (!supabaseClient) {
 
-        email: email,
-        password: password,
+        throw new Error(
+            "Authentication system is not connected yet."
+        );
 
-        options: {
-            data: {
-                first_name: firstName,
-                last_name: lastName,
-                username: username
+    }
+
+    const { data, error } =
+        await supabaseClient.auth.signUp({
+
+            email: email,
+
+            password: password,
+
+            options: {
+
+                data: {
+                    first_name: firstName,
+                    last_name: lastName,
+                    username: username
+                }
+
             }
-        }
 
-    });
+        });
 
     if (error) {
         throw error;
@@ -162,16 +189,23 @@ async function registerUser(
 }
 
 
-// ========================================
-// LOGIN
-// ========================================
+// ================= LOGIN =================
 
 async function loginUser(email, password) {
+
+    if (!supabaseClient) {
+
+        throw new Error(
+            "Authentication system is not connected yet."
+        );
+
+    }
 
     const { data, error } =
         await supabaseClient.auth.signInWithPassword({
 
             email: email,
+
             password: password
 
         });
@@ -184,9 +218,7 @@ async function loginUser(email, password) {
 }
 
 
-// ========================================
-// REGISTER FORM
-// ========================================
+// ================= REGISTER FORM =================
 
 async function registerDemo(event) {
 
@@ -210,6 +242,7 @@ async function registerDemo(event) {
     const confirmPassword =
         document.getElementById("confirmPassword")?.value;
 
+
     if (
         !firstName ||
         !lastName ||
@@ -217,54 +250,89 @@ async function registerDemo(event) {
         !username ||
         !password
     ) {
+
         alert("Please fill in all fields.");
-        return;
+
+        return false;
     }
+
 
     if (password !== confirmPassword) {
+
         alert("Passwords do not match.");
-        return;
+
+        return false;
     }
 
+
     if (password.length < 6) {
-        alert("Password must be at least 6 characters.");
-        return;
+
+        alert(
+            "Password must be at least 6 characters."
+        );
+
+        return false;
     }
+
 
     try {
 
-        const data = await registerUser(
-            firstName,
-            lastName,
-            email,
-            username,
-            password
+        const data =
+            await registerUser(
+                firstName,
+                lastName,
+                email,
+                username,
+                password
+            );
+
+        console.log(
+            "Registration successful:",
+            data
         );
 
-        console.log("Registration successful:", data);
 
-        alert(
-            "Account created successfully! Check your email if verification is required."
-        );
+        if (
+            data.user &&
+            !data.session
+        ) {
 
-        window.location.href = "login.html";
+            alert(
+                "Account created successfully! Please check your email to verify your account."
+            );
+
+        } else {
+
+            alert(
+                "Account created successfully!"
+            );
+
+        }
+
+
+        window.location.href =
+            "login.html";
+
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Registration error:",
+            error
+        );
 
         alert(
-            "Registration failed: " + error.message
+            "Registration failed: " +
+            error.message
         );
 
     }
 
+    return false;
 }
 
 
-// ========================================
-// LOGIN FORM
-// ========================================
+// ================= LOGIN FORM =================
 
 async function loginDemo(event) {
 
@@ -276,78 +344,99 @@ async function loginDemo(event) {
     const password =
         document.getElementById("password")?.value;
 
+
     if (!email || !password) {
-        alert("Please enter your email and password.");
-        return;
+
+        alert(
+            "Please enter your email and password."
+        );
+
+        return false;
     }
+
 
     try {
 
-        await loginUser(email, password);
+        await loginUser(
+            email,
+            password
+        );
 
-        alert("Login successful!");
 
-        window.location.href = "dashboard.html";
+        alert(
+            "Login successful!"
+        );
+
+
+        window.location.href =
+            "dashboard.html";
+
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Login error:",
+            error
+        );
 
         alert(
-            "Login failed: " + error.message
+            "Login failed: " +
+            error.message
         );
 
     }
 
+    return false;
 }
 
 
-// ========================================
-// PROTECT DASHBOARD
-// ========================================
+// ================= PROTECT DASHBOARD =================
 
 async function protectDashboard() {
 
-    const user = await getCurrentUser();
+    const user =
+        await getCurrentUser();
 
     if (!user) {
-        window.location.href = "login.html";
-        return;
+
+        window.location.href =
+            "login.html";
+
+        return null;
     }
 
-    console.log("Dashboard user:", user.email);
+    console.log(
+        "Dashboard user:",
+        user.email
+    );
 
+    return user;
 }
 
 
-// ========================================
-// DISPLAY USER EMAIL
-// ========================================
+// ================= DISPLAY USER EMAIL =================
 
 async function displayUserEmail() {
 
-    const user = await getCurrentUser();
+    const user =
+        await getCurrentUser();
 
     if (!user) {
         return;
     }
 
+
     const elements =
-        document.querySelectorAll("[data-user-email]");
+        document.querySelectorAll(
+            "[data-user-email]"
+        );
+
 
     elements.forEach(function (element) {
-        element.textContent = user.email;
+
+        element.textContent =
+            user.email;
+
     });
 
 }
-
-
-// ========================================
-// INITIALIZE
-// ========================================
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    displayUserEmail();
-
-});
