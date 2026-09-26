@@ -3,14 +3,425 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Molescreativivity Platform</title>
+
+    <meta name="description" content="Molescreativivity Platform — digital services, marketplace, tools and creative solutions.">
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <h1>Welcome to Molescreativivity</h1>
+    <!-- HEADER -->
+    <header class="header">
 
-    <p>Your digital services platform.</p>
+        <div class="logo">
+            <span class="logo-mark">M</span>
+            <span>Molescreativivity</span>
+        </div>
+
+        <nav class="desktop-nav">
+            <a href="index.html" class="active">Home</a>
+            <a href="marketplace.html">Marketplace</a>
+            <a href="services.html">Services</a>
+            <a href="community.html">Community</a>
+            <a href="support.html">Support</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="register.html" class="signup-btn">Get Started</a>
+        </div>
+
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    </header>
+
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="services.html">Services</a>
+        <a href="wallet.html">Wallet</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="purchases.html">My Purchases</a>
+        <a href="referrals.html">Referrals</a>
+        <a href="community.html">Community</a>
+        <a href="support.html">Support</a>
+
+        <div class="mobile-auth">
+            <a href="login.html">Login</a>
+            <a href="register.html">Create Account</a>
+        </div>
+
+    </div>
+
+
+    <!-- HERO -->
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-badge">
+                    ✦ The Molescreativivity Digital Platform
+                </div>
+
+                <h1>
+                    Everything digital.
+                    <span>One powerful platform.</span>
+                </h1>
+
+                <p>
+                    Discover digital services, creative solutions, useful tools
+                    and a growing marketplace — all in one place.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="marketplace.html" class="primary-btn">
+                        Explore Marketplace →
+                    </a>
+
+                    <a href="services.html" class="secondary-btn">
+                        View Services
+                    </a>
+
+                </div>
+
+                <div class="hero-trust">
+                    <span>✓ Digital services</span>
+                    <span>✓ Secure platform</span>
+                    <span>✓ Easy to use</span>
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD PREVIEW -->
+
+            <div class="hero-dashboard">
+
+                <div class="dashboard-top">
+
+                    <div>
+                        <small>Welcome back</small>
+                        <h3>Molescreativivity</h3>
+                    </div>
+
+                    <div class="profile-circle">
+                        M
+                    </div>
+
+                </div>
+
+
+                <div class="balance-card">
+
+                    <div>
+                        <small>Available Balance</small>
+
+                        <h2>₦0.00</h2>
+                    </div>
+
+                    <div class="wallet-icon">
+                        ₦
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+                    <div class="quick-card">
+                        <div>🛒</div>
+                        <span>Marketplace</span>
+                    </div>
+
+                    <div class="quick-card">
+                        <div>💳</div>
+                        <span>Deposit</span>
+                    </div>
+
+                    <div class="quick-card">
+                        <div>📦</div>
+                        <span>Purchases</span>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-transaction">
+
+                    <div>
+                        <small>Recent activity</small>
+                        <p>No transactions yet</p>
+                    </div>
+
+                    <span>—</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FEATURES -->
+
+        <section class="features">
+
+            <div class="section-heading">
+
+                <span>PLATFORM</span>
+
+                <h2>
+                    Everything you need,
+                    <strong>in one place.</strong>
+                </h2>
+
+                <p>
+                    A growing digital ecosystem designed to make buying,
+                    selling and accessing digital services easier.
+                </p>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <a href="marketplace.html" class="feature-card">
+
+                    <div class="feature-icon">🛍️</div>
+
+                    <h3>Marketplace</h3>
+
+                    <p>
+                        Browse digital products and services available
+                        through the platform.
+                    </p>
+
+                    <span>Explore →</span>
+
+                </a>
+
+
+                <a href="services.html" class="feature-card">
+
+                    <div class="feature-icon">🎨</div>
+
+                    <h3>Creative Services</h3>
+
+                    <p>
+                        Get graphics, websites, branding and other
+                        digital solutions.
+                    </p>
+
+                    <span>View services →</span>
+
+                </a>
+
+
+                <a href="wallet.html" class="feature-card">
+
+                    <div class="feature-icon">💳</div>
+
+                    <h3>Digital Wallet</h3>
+
+                    <p>
+                        Manage your platform balance and future
+                        transactions from one dashboard.
+                    </p>
+
+                    <span>Open wallet →</span>
+
+                </a>
+
+
+                <a href="community.html" class="feature-card">
+
+                    <div class="feature-icon">👥</div>
+
+                    <h3>Community</h3>
+
+                    <p>
+                        Connect, discover opportunities and interact
+                        with other platform users.
+                    </p>
+
+                    <span>Join community →</span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- SERVICES -->
+
+        <section class="services-preview">
+
+            <div class="services-text">
+
+                <span class="section-label">OUR SERVICES</span>
+
+                <h2>
+                    Build. Create.
+                    <span>Grow.</span>
+                </h2>
+
+                <p>
+                    Molescreativivity combines creative services and
+                    digital solutions into one platform.
+                </p>
+
+                <a href="services.html" class="primary-btn">
+                    Explore Services →
+                </a>
+
+            </div>
+
+
+            <div class="service-list">
+
+                <div class="service-item">
+                    <span>01</span>
+                    <div>
+                        <h3>Graphic Design</h3>
+                        <p>Flyers, social media graphics and branding.</p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <span>02</span>
+                    <div>
+                        <h3>Website Creation</h3>
+                        <p>Modern websites for businesses and brands.</p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <span>03</span>
+                    <div>
+                        <h3>Digital Solutions</h3>
+                        <p>Useful digital tools and creative solutions.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA -->
+
+        <section class="cta">
+
+            <div>
+
+                <span>READY TO START?</span>
+
+                <h2>
+                    Your digital journey
+                    starts here.
+                </h2>
+
+                <p>
+                    Create your account and explore the Molescreativivity
+                    platform.
+                </p>
+
+                <a href="register.html" class="cta-btn">
+                    Create Free Account →
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+
+                <div class="logo">
+                    <span class="logo-mark">M</span>
+                    <span>Molescreativivity</span>
+                </div>
+
+                <p>
+                    Creative services, digital solutions and more —
+                    all in one platform.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Platform</h4>
+
+                <a href="marketplace.html">Marketplace</a>
+                <a href="services.html">Services</a>
+                <a href="wallet.html">Wallet</a>
+                <a href="transactions.html">Transactions</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Company</h4>
+
+                <a href="community.html">Community</a>
+                <a href="support.html">Support</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Account</h4>
+
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+                <a href="purchases.html">My Purchases</a>
+                <a href="referrals.html">Referrals</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Molescreativivity. All rights reserved.
+            </span>
+
+            <span>
+                Built for the digital age.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
 
 </body>
 </html>
