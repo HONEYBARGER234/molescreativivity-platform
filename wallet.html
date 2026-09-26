@@ -1,1 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Wallet — Molescreativivity</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .dashboard-page {
+            padding: 80px 7%;
+            min-height: 70vh;
+        }
+
+        .dashboard-heading {
+            margin-bottom: 35px;
+        }
+
+        .dashboard-heading span {
+            color: #a78bfa;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .dashboard-heading h1 {
+            font-size: clamp(38px, 5vw, 60px);
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-top: 12px;
+        }
+
+        .dashboard-heading p {
+            color: #9298a8;
+            margin-top: 12px;
+        }
+
+        .wallet-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 20px;
+        }
+
+        .wallet-main-card {
+            padding: 35px;
+            min-height: 280px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #5b21b6, #2563eb);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wallet-main-card::after {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            right: -80px;
+            top: -80px;
+        }
+
+        .wallet-main-card small {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .wallet-main-card h2 {
+            font-size: 45px;
+            margin-top: 10px;
+        }
+
+        .wallet-number {
+            margin-top: 65px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .wallet-side {
+            display: grid;
+            gap: 15px;
+        }
+
+        .wallet-action {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 25px;
+            border-radius: 18px;
+            background: #11131b;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: 0.3s;
+        }
+
+        .wallet-action:hover {
+            transform: translateY(-3px);
+            background: #171a24;
+        }
+
+        .wallet-action-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(139,92,246,0.12);
+            font-size: 21px;
+        }
+
+        .wallet-action h3 {
+            font-size: 15px;
+        }
+
+        .wallet-action p {
+            color: #9298a8;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .wallet-info {
+            margin-top: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            background: #11131b;
+        }
+
+        .wallet-info h3 {
+            font-size: 16px;
+        }
+
+        .wallet-info p {
+            color: #9298a8;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 800px) {
+
+            .wallet-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-page {
+                padding: 65px 5%;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<header class="header">
+
+    <a href="index.html" class="logo">
+        <span class="logo-mark">M</span>
+        <span>Molescreativivity</span>
+    </a>
+
+    <nav class="desktop-nav">
+
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="services.html">Services</a>
+        <a href="community.html">Community</a>
+        <a href="support.html">Support</a>
+
+    </nav>
+
+    <div class="header-actions">
+
+        <a href="login.html" class="login-btn">Login</a>
+        <a href="register.html" class="signup-btn">Get Started</a>
+
+    </div>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+</header>
+
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="index.html">Home</a>
+    <a href="marketplace.html">Marketplace</a>
+    <a href="services.html">Services</a>
+    <a href="wallet.html">Wallet</a>
+    <a href="transactions.html">Transactions</a>
+    <a href="purchases.html">My Purchases</a>
+    <a href="referrals.html">Referrals</a>
+    <a href="community.html">Community</a>
+    <a href="support.html">Support</a>
+
+    <div class="mobile-auth">
+        <a href="login.html">Login</a>
+        <a href="register.html">Create Account</a>
+    </div>
+
+</div>
+
+
+<main>
+
+<section class="dashboard-page">
+
+    <div class="dashboard-heading">
+
+        <span>DIGITAL WALLET</span>
+
+        <h1>
+            Your
+            <span style="color:#a78bfa;">wallet.</span>
+        </h1>
+
+        <p>
+            Manage your platform balance and payments from one place.
+        </p>
+
+    </div>
+
+
+    <div class="wallet-layout">
+
+
+        <div class="wallet-main-card">
+
+            <small>AVAILABLE BALANCE</small>
+
+            <h2>₦0.00</h2>
+
+            <div class="wallet-number">
+                Molescreativivity Digital Wallet
+            </div>
+
+        </div>
+
+
+        <div class="wallet-side">
+
+
+            <a href="#" class="wallet-action">
+
+                <div class="wallet-action-icon">
+                    💳
+                </div>
+
+                <div>
+
+                    <h3>Deposit Funds</h3>
+
+                    <p>
+                        Add money to your platform wallet.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <a href="transactions.html" class="wallet-action">
+
+                <div class="wallet-action-icon">
+                    📊
+                </div>
+
+                <div>
+
+                    <h3>Transactions</h3>
+
+                    <p>
+                        View your wallet activity.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <a href="purchases.html" class="wallet-action">
+
+                <div class="wallet-action-icon">
+                    🛍️
+                </div>
+
+                <div>
+
+                    <h3>My Purchases</h3>
+
+                    <p>
+                        View your orders and purchases.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="wallet-info">
+
+        <h3>Wallet information</h3>
+
+        <p>
+            Your balance and transactions will appear here once
+            your account and payment system are connected.
+        </p>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <a href="index.html" class="logo">
+                <span class="logo-mark">M</span>
+                <span>Molescreativivity</span>
+            </a>
+
+            <p>
+                Creative services, digital solutions and more —
+                all in one platform.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Platform</h4>
+
+            <a href="marketplace.html">Marketplace</a>
+            <a href="services.html">Services</a>
+            <a href="wallet.html">Wallet</a>
+            <a href="transactions.html">Transactions</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Account</h4>
+
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="purchases.html">Purchases</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Help</h4>
+
+            <a href="support.html">Support</a>
+            <a href="community.html">Community</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>© 2026 Molescreativivity.</span>
+
+        <span>Digital services & solutions.</span>
+
+    </div>
+
+</footer>
+
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
+
+Save/commit it.
+
+This wallet is currently a visual/frontend wallet only — the real balance, deposits and payment verification come later when we connect the backend and payment provider.
+
+Tell me “wallet done” and we'll create the Transactions page next.
