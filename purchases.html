@@ -1,1 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Purchases — Molescreativivity</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .dashboard-page {
+            padding: 80px 7%;
+            min-height: 70vh;
+        }
+
+        .dashboard-heading {
+            margin-bottom: 35px;
+        }
+
+        .dashboard-heading span {
+            color: #a78bfa;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .dashboard-heading h1 {
+            font-size: clamp(38px, 5vw, 60px);
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-top: 12px;
+        }
+
+        .dashboard-heading p {
+            color: #9298a8;
+            margin-top: 12px;
+        }
+
+        .purchase-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .purchase-tab {
+            padding: 10px 16px;
+            border-radius: 9px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: #11131b;
+            color: #9298a8;
+            font-size: 12px;
+        }
+
+        .purchase-tab.active {
+            color: white;
+            background: rgba(139,92,246,0.16);
+            border-color: rgba(167,139,250,0.25);
+        }
+
+        .purchases-box {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            background: #11131b;
+            overflow: hidden;
+        }
+
+        .purchase-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 23px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .purchase-item:last-child {
+            border-bottom: 0;
+        }
+
+        .purchase-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .purchase-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: rgba(139,92,246,0.12);
+            font-size: 21px;
+        }
+
+        .purchase-info h3 {
+            font-size: 14px;
+        }
+
+        .purchase-info p {
+            color: #777e90;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .purchase-status {
+            text-align: right;
+        }
+
+        .purchase-status strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .purchase-status span {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.05);
+            color: #9298a8;
+            font-size: 9px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        .empty-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 19px;
+            background: rgba(139,92,246,0.1);
+            font-size: 27px;
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+        }
+
+        .empty-state p {
+            max-width: 430px;
+            margin: 8px auto 22px;
+            color: #777e90;
+            font-size: 13px;
+        }
+
+        @media (max-width: 650px) {
+
+            .dashboard-page {
+                padding: 65px 5%;
+            }
+
+            .purchase-item {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .purchase-status {
+                text-align: left;
+                padding-left: 63px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <a href="index.html" class="logo">
+
+        <span class="logo-mark">M</span>
+
+        <span>Molescreativivity</span>
+
+    </a>
+
+
+    <nav class="desktop-nav">
+
+        <a href="index.html">Home</a>
+
+        <a href="marketplace.html">Marketplace</a>
+
+        <a href="services.html">Services</a>
+
+        <a href="community.html">Community</a>
+
+        <a href="support.html">Support</a>
+
+    </nav>
+
+
+    <div class="header-actions">
+
+        <a href="login.html" class="login-btn">
+            Login
+        </a>
+
+        <a href="register.html" class="signup-btn">
+            Get Started
+        </a>
+
+    </div>
+
+
+    <button class="menu-btn" onclick="toggleMenu()">
+        ☰
+    </button>
+
+</header>
+
+
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="index.html">Home</a>
+
+    <a href="marketplace.html">Marketplace</a>
+
+    <a href="services.html">Services</a>
+
+    <a href="wallet.html">Wallet</a>
+
+    <a href="transactions.html">Transactions</a>
+
+    <a href="purchases.html">My Purchases</a>
+
+    <a href="referrals.html">Referrals</a>
+
+    <a href="community.html">Community</a>
+
+    <a href="support.html">Support</a>
+
+
+    <div class="mobile-auth">
+
+        <a href="login.html">Login</a>
+
+        <a href="register.html">
+            Create Account
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<main>
+
+<section class="dashboard-page">
+
+
+    <div class="dashboard-heading">
+
+        <span>YOUR ORDERS</span>
+
+        <h1>
+            My Purchases<span style="color:#a78bfa;">.</span>
+        </h1>
+
+        <p>
+            View your digital products, services and order history.
+        </p>
+
+    </div>
+
+
+
+    <div class="purchase-tabs">
+
+        <div class="purchase-tab active">
+            All Purchases
+        </div>
+
+        <div class="purchase-tab">
+            Completed
+        </div>
+
+        <div class="purchase-tab">
+            Pending
+        </div>
+
+    </div>
+
+
+
+    <div class="purchases-box">
+
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                📦
+            </div>
+
+            <h3>
+                No purchases yet
+            </h3>
+
+            <p>
+                Products and services you purchase through
+                Molescreativivity will appear here.
+            </p>
+
+            <a href="marketplace.html" class="primary-btn">
+                Explore Marketplace →
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+</main>
+
+
+
+<footer>
+
+    <div class="footer-main">
+
+
+        <div class="footer-brand">
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-mark">
+                    M
+                </span>
+
+                <span>
+                    Molescreativivity
+                </span>
+
+            </a>
+
+
+            <p>
+                Creative services, digital solutions and more —
+                all in one platform.
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>Platform</h4>
+
+            <a href="marketplace.html">
+                Marketplace
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="wallet.html">
+                Wallet
+            </a>
+
+            <a href="transactions.html">
+                Transactions
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>Account</h4>
+
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="register.html">
+                Register
+            </a>
+
+            <a href="purchases.html">
+                Purchases
+            </a>
+
+            <a href="referrals.html">
+                Referrals
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>Help</h4>
+
+            <a href="support.html">
+                Support
+            </a>
+
+            <a href="community.html">
+                Community
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 Molescreativivity.
+        </span>
+
+        <span>
+            Digital services & solutions.
+        </span>
+
+    </div>
+
+</footer>
+
+
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
+
+Save/commit it.
+
+Current structure
+
+You should now have:
+
+Molescreativivity-platform
+│
+├── index.html
+├── marketplace.html
+├── services.html
+├── wallet.html
+├── transactions.html
+├── purchases.html
+│
+├── css
+│   └── style.css
+│
+└── js
+    └── script.js
+
+Next we'll create "referrals.html". After that, we'll tackle the login + registration pages, which is where we start laying the foundation for actual user accounts.
