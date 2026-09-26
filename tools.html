@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Digital Tools | Molescreativivity</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .tools-page {
+            padding: 50px 20px 80px;
+        }
+
+        .tools-hero {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 55px;
+        }
+
+        .tools-hero h1 {
+            font-size: clamp(38px, 6vw, 62px);
+            line-height: 1.05;
+            margin: 15px 0;
+        }
+
+        .tools-hero h1 span {
+            color: var(--primary-light);
+        }
+
+        .tools-hero p {
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .tool-card {
+            position: relative;
+            padding: 28px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            transition: .25s ease;
+            overflow: hidden;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            background: var(--card-hover);
+            border-color: rgba(139,92,246,.3);
+        }
+
+        .tool-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            background: rgba(139,92,246,.12);
+            margin-bottom: 22px;
+        }
+
+        .tool-card h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+        }
+
+        .tool-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .tool-card a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .coming-soon {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: rgba(34,211,238,.08);
+            color: var(--accent);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .5px;
+        }
+
+        .tool-highlight {
+            margin-top: 50px;
+            padding: 35px;
+            border-radius: 24px;
+            border: 1px solid rgba(139,92,246,.2);
+            background:
+                radial-gradient(circle at right, rgba(139,92,246,.18), transparent 45%),
+                var(--card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .tool-highlight h2 {
+            margin: 8px 0;
+            font-size: 28px;
+        }
+
+        .tool-highlight p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin: 0;
+            max-width: 650px;
+        }
+
+        .tool-highlight-icon {
+            min-width: 80px;
+            width: 80px;
+            height: 80px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            background: rgba(139,92,246,.12);
+        }
+
+        .tool-notice {
+            margin-top: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-highlight {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="container nav-container">
+
+        <a href="index.html" class="logo">
+            <span class="logo-mark">M</span>
+            <span>Molescreativivity</span>
+        </a>
+
+        <nav class="nav" id="mainNav">
+
+            <a href="index.html">Home</a>
+            <a href="marketplace.html">Marketplace</a>
+            <a href="services.html">Services</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="community.html">Community</a>
+            <a href="support.html">Support</a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <a href="login.html" class="btn btn-outline">
+                Login
+            </a>
+
+            <a href="register.html" class="btn btn-primary">
+                Get Started
+            </a>
+
+        </div>
+
+        <button class="menu-toggle" onclick="toggleMenu()">
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="tools-page">
+
+    <div class="container">
+
+        <!-- HERO -->
+
+        <section class="tools-hero">
+
+            <span class="eyebrow">
+                DIGITAL TOOLKIT
+            </span>
+
+            <h1>
+                Useful tools for your
+                <span>digital journey.</span>
+            </h1>
+
+            <p>
+                Molescreativivity can grow beyond services into
+                a collection of simple digital tools designed
+                for creators, businesses and everyday users.
+            </p>
+
+        </section>
+
+
+        <!-- TOOLS -->
+
+        <section class="tools-grid">
+
+            <div class="tool-card">
+
+                <div class="tool-icon">
+                    🎨
+                </div>
+
+                <h3>
+                    Design Resources
+                </h3>
+
+                <p>
+                    Discover useful resources and creative
+                    materials for your next design project.
+                </p>
+
+                <a href="marketplace.html">
+                    Explore resources →
+                </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <span class="coming-soon">
+                    COMING SOON
+                </span>
+
+                <div class="tool-icon">
+                    🧮
+                </div>
+
+                <h3>
+                    Price Calculator
+                </h3>
+
+                <p>
+                    Estimate project costs and get quick
+                    pricing calculations for digital work.
+                </p>
+
+                <a href="#">
+                    Coming soon →
+                </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <span class="coming-soon">
+                    COMING SOON
+                </span>
+
+                <div class="tool-icon">
+                    📱
+                </div>
+
+                <h3>
+                    Social Media Toolkit
+                </h3>
+
+                <p>
+                    Helpful tools for planning, creating and
+                    managing your social media content.
+                </p>
+
+                <a href="#">
+                    Coming soon →
+                </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <span class="coming-soon">
+                    COMING SOON
+                </span>
+
+                <div class="tool-icon">
+                    🔗
+                </div>
+
+                <h3>
+                    Link Builder
+                </h3>
+
+                <p>
+                    Create simple shareable links for your
+                    business, portfolio and digital services.
+                </p>
+
+                <a href="#">
+                    Coming soon →
+                </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <span class="coming-soon">
+                    COMING SOON
+                </span>
+
+                <div class="tool-icon">
+                    📄
+                </div>
+
+                <h3>
+                    Invoice Generator
+                </h3>
+
+                <p>
+                    Generate professional invoices for clients
+                    and digital projects.
+                </p>
+
+                <a href="#">
+                    Coming soon →
+                </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <span class="coming-soon">
+                    COMING SOON
+                </span>
+
+                <div class="tool-icon">
+                    ✍️
+                </div>
+
+                <h3>
+                    Content Assistant
+                </h3>
+
+                <p>
+                    Tools to help creators generate ideas,
+                    organize content and plan campaigns.
+                </p>
+
+                <a href="#">
+                    Coming soon →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- HIGHLIGHT -->
+
+        <section class="tool-highlight">
+
+            <div>
+
+                <span class="eyebrow">
+                    BUILT FOR CREATORS
+                </span>
+
+                <h2>
+                    One platform. More digital possibilities.
+                </h2>
+
+                <p>
+                    We're building Molescreativivity as more than
+                    a website. The goal is a useful digital ecosystem
+                    where people can discover services, purchase
+                    products, use tools and connect with others.
+                </p>
+
+            </div>
+
+            <div class="tool-highlight-icon">
+                🚀
+            </div>
+
+        </section>
+
+
+        <!-- NOTICE -->
+
+        <section class="platform-notice tool-notice">
+
+            <div class="notice-icon">
+                ℹ️
+            </div>
+
+            <div>
+
+                <h3>
+                    Tools will be activated gradually
+                </h3>
+
+                <p>
+                    The current page is the frontend foundation.
+                    Individual tools can be connected to real
+                    JavaScript functionality or backend services
+                    as the platform develops.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+        <div>
+
+            <a href="index.html" class="logo">
+                <span class="logo-mark">M</span>
+                <span>Molescreativivity</span>
+            </a>
+
+            <p>
+                Digital creativity, services and solutions
+                built for modern creators and businesses.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4>Platform</h4>
+
+            <a href="marketplace.html">Marketplace</a>
+            <a href="services.html">Services</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="community.html">Community</a>
+
+        </div>
+
+
+        <div>
+
+            <h4>Account</h4>
+
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="wallet.html">Wallet</a>
+            <a href="referrals.html">Referrals</a>
+
+        </div>
+
+
+        <div>
+
+            <h4>Support</h4>
+
+            <a href="support.html">Help Center</a>
+            <a href="support.html#contact">Contact Us</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <div class="container">
+
+            <p>
+                © <span class="current-year"></span>
+                Molescreativivity. All rights reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
