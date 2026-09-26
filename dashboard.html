@@ -4,35 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta
+        name="description"
+        content="Molescreativivity user dashboard."
+    >
+
     <title>Dashboard | Molescreativivity</title>
 
     <link rel="stylesheet" href="css/style.css">
 
     <style>
         .dashboard-page {
-            padding: 45px 20px 80px;
+            padding: 55px 0 90px;
         }
 
-        .dashboard-top {
+        .welcome-box {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: flex-end;
             gap: 20px;
             margin-bottom: 30px;
         }
 
-        .dashboard-top h1 {
-            margin: 8px 0;
-            font-size: clamp(30px, 5vw, 46px);
+        .welcome-box h1 {
+            font-size: clamp(30px, 5vw, 45px);
+            letter-spacing: -1px;
         }
 
-        .dashboard-top h1 span {
+        .welcome-box h1 span {
             color: var(--primary-light);
         }
 
-        .dashboard-top p {
+        .welcome-box p {
             color: var(--muted);
-            margin: 0;
+            margin-top: 5px;
+            font-size: 14px;
         }
 
         .dashboard-actions {
@@ -41,94 +47,53 @@
             flex-wrap: wrap;
         }
 
-        .dashboard-grid {
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 22px;
         }
 
-        .dash-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 22px;
-            padding: 25px;
-        }
-
-        .balance-card {
-            grid-column: span 8;
-            min-height: 230px;
-            background:
-                radial-gradient(circle at top right, rgba(139,92,246,.35), transparent 40%),
-                linear-gradient(135deg, #11131b, #171326);
+        .stat-card {
             position: relative;
             overflow: hidden;
         }
 
-        .balance-card::after {
-            content: "M";
+        .stat-card::after {
+            content: "";
             position: absolute;
-            right: 30px;
-            bottom: -45px;
-            font-size: 190px;
-            font-weight: 900;
-            color: rgba(255,255,255,.025);
-        }
-
-        .balance-label {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .balance-amount {
-            font-size: clamp(38px, 6vw, 60px);
-            font-weight: 800;
-            margin: 12px 0 20px;
-        }
-
-        .balance-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 2;
-        }
-
-        .stat-card {
-            grid-column: span 4;
+            width: 100px;
+            height: 100px;
+            right: -45px;
+            bottom: -50px;
+            border-radius: 50%;
+            background: rgba(139,92,246,.08);
         }
 
         .stat-icon {
-            width: 46px;
-            height: 46px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(139,92,246,.12);
             font-size: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
-        .stat-label {
-            color: var(--muted);
-            font-size: 13px;
+        .stat-card strong {
+            font-size: 25px;
         }
 
-        .stat-value {
-            display: block;
-            font-size: 30px;
-            margin-top: 7px;
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .section-card {
-            grid-column: span 7;
+        .dashboard-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
         }
 
-        .side-card {
-            grid-column: span 5;
-        }
-
-        .dash-card-header {
+        .dashboard-card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -136,72 +101,75 @@
             margin-bottom: 20px;
         }
 
-        .dash-card-header h2 {
-            margin: 0;
-            font-size: 21px;
+        .dashboard-card-header h2 {
+            font-size: 18px;
         }
 
-        .dash-card-header a {
+        .dashboard-card-header a {
             color: var(--primary-light);
             text-decoration: none;
+            font-size: 12px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .activity-item:last-child {
+            border-bottom: 0;
+        }
+
+        .activity-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: rgba(139,92,246,.09);
+            flex-shrink: 0;
+        }
+
+        .activity-info {
+            flex: 1;
+        }
+
+        .activity-info strong {
+            display: block;
             font-size: 13px;
         }
 
-        .empty-dashboard {
-            border: 1px dashed var(--border);
-            border-radius: 16px;
-            padding: 35px 20px;
-            text-align: center;
-        }
-
-        .empty-dashboard-icon {
-            font-size: 35px;
-            margin-bottom: 10px;
-        }
-
-        .empty-dashboard h3 {
-            margin: 5px 0 8px;
-        }
-
-        .empty-dashboard p {
+        .activity-info span {
             color: var(--muted);
-            font-size: 14px;
-            margin: 0 auto 18px;
-            max-width: 430px;
-            line-height: 1.7;
+            font-size: 11px;
         }
 
         .quick-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
         .quick-action {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px;
+            padding: 18px;
+            text-decoration: none;
+            background: var(--bg-soft);
             border: 1px solid var(--border);
             border-radius: 14px;
-            text-decoration: none;
-            color: var(--text);
-            transition: .25s ease;
+            transition: .2s ease;
         }
 
         .quick-action:hover {
-            background: var(--card-hover);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            border-color: rgba(139,92,246,.3);
         }
 
         .quick-action-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 11px;
-            background: rgba(139,92,246,.12);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 10px;
         }
 
         .quick-action strong {
@@ -212,69 +180,101 @@
         .quick-action span {
             display: block;
             color: var(--muted);
-            font-size: 11px;
+            font-size: 10px;
             margin-top: 3px;
         }
 
-        .dashboard-banner {
-            grid-column: 1 / -1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 25px;
-            padding: 30px;
+        .balance-card {
+            margin-top: 20px;
+            padding: 28px;
             border-radius: 22px;
-            border: 1px solid rgba(139,92,246,.2);
             background:
                 linear-gradient(
-                    120deg,
-                    rgba(139,92,246,.13),
+                    135deg,
+                    rgba(139,92,246,.17),
                     rgba(34,211,238,.05)
                 );
+            border: 1px solid rgba(139,92,246,.22);
         }
 
-        .dashboard-banner h2 {
-            margin: 0 0 8px;
+        .balance-card small {
+            color: var(--muted);
+        }
+
+        .balance-card h2 {
+            font-size: 36px;
+            margin: 7px 0 20px;
+        }
+
+        .balance-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .dashboard-banner {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 22px;
+            border-radius: 18px;
+            background: var(--card);
+            border: 1px solid var(--border);
+        }
+
+        .banner-icon {
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            background: rgba(34,211,238,.08);
+            flex-shrink: 0;
+        }
+
+        .dashboard-banner h3 {
+            font-size: 14px;
+            margin-bottom: 4px;
         }
 
         .dashboard-banner p {
             color: var(--muted);
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        .dashboard-banner-icon {
-            width: 75px;
-            height: 75px;
-            min-width: 75px;
-            border-radius: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            background: rgba(139,92,246,.14);
+            font-size: 12px;
         }
 
         @media (max-width: 900px) {
-            .balance-card,
-            .stat-card,
-            .section-card,
-            .side-card {
-                grid-column: span 6;
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 650px) {
-            .dashboard-top {
+        @media (max-width: 600px) {
+            .welcome-box {
                 align-items: flex-start;
                 flex-direction: column;
             }
 
-            .balance-card,
-            .stat-card,
-            .section-card,
-            .side-card {
-                grid-column: 1 / -1;
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat-card {
+                padding: 17px;
+            }
+
+            .stat-card strong {
+                font-size: 21px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
 
             .quick-grid {
@@ -283,7 +283,6 @@
 
             .dashboard-banner {
                 align-items: flex-start;
-                flex-direction: column;
             }
         }
     </style>
@@ -291,7 +290,9 @@
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header class="header">
 
@@ -305,23 +306,44 @@
         <nav class="nav" id="mainNav">
 
             <a href="index.html">Home</a>
-            <a href="marketplace.html">Marketplace</a>
-            <a href="services.html">Services</a>
-            <a href="wallet.html">Wallet</a>
-            <a href="community.html">Community</a>
-            <a href="support.html">Support</a>
+
+            <a href="marketplace.html">
+                Marketplace
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="community.html">
+                Community
+            </a>
+
+            <a href="support.html">
+                Support
+            </a>
 
         </nav>
 
         <div class="nav-actions">
 
-            <a href="login.html" class="btn btn-outline">
-                Logout
+            <a
+                href="settings.html"
+                class="btn btn-outline"
+            >
+                ⚙ Settings
             </a>
 
         </div>
 
-        <button class="menu-toggle" onclick="toggleMenu()">
+        <button
+            class="menu-toggle"
+            onclick="toggleMenu()"
+        >
             ☰
         </button>
 
@@ -330,110 +352,152 @@
 </header>
 
 
-<!-- ================= DASHBOARD ================= -->
+<!-- =====================================================
+     MAIN DASHBOARD
+===================================================== -->
 
 <main class="dashboard-page">
 
     <div class="container">
 
-        <!-- TOP -->
 
-        <div class="dashboard-top">
+        <!-- WELCOME -->
+
+        <section class="welcome-box reveal">
 
             <div>
 
                 <span class="eyebrow">
-                    MY DASHBOARD
+                    YOUR WORKSPACE
                 </span>
 
                 <h1>
-                    Welcome to <span>Molescreativivity.</span>
+                    Welcome to
+                    <span>Molescreativivity.</span>
                 </h1>
 
                 <p>
-                    Manage your digital activity from one place.
+                    Manage your wallet, purchases,
+                    services and platform activity.
                 </p>
 
             </div>
 
             <div class="dashboard-actions">
 
-                <a href="marketplace.html" class="btn btn-primary">
+                <a
+                    href="marketplace.html"
+                    class="btn btn-primary"
+                >
                     Explore Marketplace
+                </a>
+
+                <a
+                    href="services.html"
+                    class="btn btn-outline"
+                >
+                    Request Service
                 </a>
 
             </div>
 
-        </div>
+        </section>
 
 
-        <!-- GRID -->
+        <!-- STATS -->
 
-        <div class="dashboard-grid">
-
-            <!-- BALANCE -->
-
-            <section class="dash-card balance-card">
-
-                <span class="balance-label">
-                    Available Balance
-                </span>
-
-                <div class="balance-amount">
-                    ₦0.00
-                </div>
-
-                <div class="balance-actions">
-
-                    <a href="wallet.html" class="btn btn-primary">
-                        Add Funds
-                    </a>
-
-                    <a href="transactions.html" class="btn btn-outline">
-                        Transactions
-                    </a>
-
-                </div>
-
-            </section>
+        <section class="stats-grid">
 
 
-            <!-- PURCHASES -->
-
-            <section class="dash-card stat-card">
+            <div class="stat-card reveal">
 
                 <div class="stat-icon">
-                    🛒
+                    💰
                 </div>
 
-                <span class="stat-label">
-                    Total Purchases
-                </span>
+                <small>
+                    Wallet Balance
+                </small>
 
-                <strong class="stat-value">
+                <strong>
+                    ₦0.00
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card reveal">
+
+                <div class="stat-icon">
+                    🛍️
+                </div>
+
+                <small>
+                    Total Purchases
+                </small>
+
+                <strong>
                     0
                 </strong>
 
-                <a
-                    href="purchases.html"
-                    class="btn btn-outline"
-                    style="margin-top:18px;"
-                >
-                    View Purchases
-                </a>
-
-            </section>
+            </div>
 
 
-            <!-- RECENT ACTIVITY -->
+            <div class="stat-card reveal">
 
-            <section class="dash-card section-card">
+                <div class="stat-icon">
+                    💸
+                </div>
 
-                <div class="dash-card-header">
+                <small>
+                    Transactions
+                </small>
 
-                    <h2>
-                        Recent Activity
-                    </h2>
+                <strong>
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card reveal">
+
+                <div class="stat-icon">
+                    🎁
+                </div>
+
+                <small>
+                    Referral Earnings
+                </small>
+
+                <strong>
+                    ₦0.00
+                </strong>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- MAIN GRID -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- ACTIVITY -->
+
+            <section class="dashboard-card reveal">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <h2>
+                            Recent Activity
+                        </h2>
+
+                    </div>
 
                     <a href="transactions.html">
                         View all
@@ -442,9 +506,9 @@
                 </div>
 
 
-                <div class="empty-dashboard">
+                <div class="empty-state">
 
-                    <div class="empty-dashboard-icon">
+                    <div class="empty-icon">
                         📊
                     </div>
 
@@ -453,16 +517,9 @@
                     </h3>
 
                     <p>
-                        Your purchases, deposits and other
-                        account activity will appear here.
+                        Your purchases and transactions
+                        will appear here.
                     </p>
-
-                    <a
-                        href="marketplace.html"
-                        class="btn btn-primary"
-                    >
-                        Start Exploring
-                    </a>
 
                 </div>
 
@@ -471,9 +528,9 @@
 
             <!-- QUICK ACTIONS -->
 
-            <section class="dash-card side-card">
+            <section class="dashboard-card reveal">
 
-                <div class="dash-card-header">
+                <div class="dashboard-card-header">
 
                     <h2>
                         Quick Actions
@@ -483,39 +540,6 @@
 
 
                 <div class="quick-grid">
-
-                    <a
-                        href="marketplace.html"
-                        class="quick-action"
-                    >
-
-                        <div class="quick-action-icon">
-                            🛍️
-                        </div>
-
-                        <div>
-                            <strong>Marketplace</strong>
-                            <span>Browse products</span>
-                        </div>
-
-                    </a>
-
-
-                    <a
-                        href="services.html"
-                        class="quick-action"
-                    >
-
-                        <div class="quick-action-icon">
-                            🎨
-                        </div>
-
-                        <div>
-                            <strong>Services</strong>
-                            <span>Hire a creator</span>
-                        </div>
-
-                    </a>
 
 
                     <a
@@ -527,10 +551,53 @@
                             💳
                         </div>
 
-                        <div>
-                            <strong>Wallet</strong>
-                            <span>Manage funds</span>
+                        <strong>
+                            Fund Wallet
+                        </strong>
+
+                        <span>
+                            Add funds
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="marketplace.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-action-icon">
+                            🛍️
                         </div>
+
+                        <strong>
+                            Marketplace
+                        </strong>
+
+                        <span>
+                            Browse products
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="purchases.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-action-icon">
+                            🧾
+                        </div>
+
+                        <strong>
+                            Purchases
+                        </strong>
+
+                        <span>
+                            View orders
+                        </span>
 
                     </a>
 
@@ -541,13 +608,36 @@
                     >
 
                         <div class="quick-action-icon">
-                            👥
+                            🎁
                         </div>
 
-                        <div>
-                            <strong>Referrals</strong>
-                            <span>Refer & earn</span>
+                        <strong>
+                            Referrals
+                        </strong>
+
+                        <span>
+                            Invite friends
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="tools.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-action-icon">
+                            🧰
                         </div>
+
+                        <strong>
+                            Tools
+                        </strong>
+
+                        <span>
+                            Open tools
+                        </span>
 
                     </a>
 
@@ -558,74 +648,95 @@
                     >
 
                         <div class="quick-action-icon">
-                            🌐
+                            👥
                         </div>
 
-                        <div>
-                            <strong>Community</strong>
-                            <span>Connect & share</span>
-                        </div>
+                        <strong>
+                            Community
+                        </strong>
+
+                        <span>
+                            Join discussions
+                        </span>
 
                     </a>
 
 
-                    <a
-                        href="support.html"
-                        class="quick-action"
-                    >
-
-                        <div class="quick-action-icon">
-                            🛟
-                        </div>
-
-                        <div>
-                            <strong>Support</strong>
-                            <span>Get assistance</span>
-                        </div>
-
-                    </a>
-
-                </div>
-
-            </section>
-
-
-            <!-- PLATFORM BANNER -->
-
-            <section class="dashboard-banner">
-
-                <div>
-
-                    <span class="eyebrow">
-                        MOLESCREATIVITY
-                    </span>
-
-                    <h2>
-                        Your creative ecosystem is growing.
-                    </h2>
-
-                    <p>
-                        More tools, products, account features
-                        and creator opportunities can be added
-                        as the platform develops.
-                    </p>
-
-                </div>
-
-                <div class="dashboard-banner-icon">
-                    🚀
                 </div>
 
             </section>
 
         </div>
 
+
+        <!-- WALLET -->
+
+        <section class="balance-card reveal">
+
+            <small>
+                AVAILABLE WALLET BALANCE
+            </small>
+
+            <h2>
+                ₦0.00
+            </h2>
+
+            <div class="balance-actions">
+
+                <a
+                    href="wallet.html"
+                    class="btn btn-primary"
+                >
+                    Fund Wallet
+                </a>
+
+                <a
+                    href="transactions.html"
+                    class="btn btn-outline"
+                >
+                    View Transactions
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- BANNER -->
+
+        <section class="dashboard-banner reveal">
+
+            <div class="banner-icon">
+                🚀
+            </div>
+
+            <div>
+
+                <h3>
+                    Your Molescreativivity workspace is ready.
+                </h3>
+
+                <p>
+                    Explore the platform and discover the
+                    services, products and tools available.
+                    Account, wallet and checkout features
+                    will become fully functional after backend
+                    integration.
+                </p>
+
+            </div>
+
+        </section>
+
+
     </div>
 
 </main>
 
 
-<!-- ================= FOOTER ================= -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer class="footer">
 
@@ -634,13 +745,20 @@
         <div>
 
             <a href="index.html" class="logo">
-                <span class="logo-mark">M</span>
-                <span>Molescreativivity</span>
+
+                <span class="logo-mark">
+                    M
+                </span>
+
+                <span>
+                    Molescreativivity
+                </span>
+
             </a>
 
             <p>
                 Digital creativity, services and solutions
-                built for modern creators and businesses.
+                for creators and businesses.
             </p>
 
         </div>
@@ -648,34 +766,75 @@
 
         <div>
 
-            <h4>Platform</h4>
+            <h4>
+                Platform
+            </h4>
 
-            <a href="marketplace.html">Marketplace</a>
-            <a href="services.html">Services</a>
-            <a href="wallet.html">Wallet</a>
-            <a href="community.html">Community</a>
+            <a href="marketplace.html">
+                Marketplace
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="tools.html">
+                Tools
+            </a>
 
         </div>
 
 
         <div>
 
-            <h4>Account</h4>
+            <h4>
+                Account
+            </h4>
 
-            <a href="dashboard.html">Dashboard</a>
-            <a href="purchases.html">Purchases</a>
-            <a href="transactions.html">Transactions</a>
-            <a href="referrals.html">Referrals</a>
+            <a href="wallet.html">
+                Wallet
+            </a>
+
+            <a href="purchases.html">
+                Purchases
+            </a>
+
+            <a href="referrals.html">
+                Referrals
+            </a>
+
+            <a href="settings.html">
+                Settings
+            </a>
 
         </div>
 
 
         <div>
 
-            <h4>Support</h4>
+            <h4>
+                Support
+            </h4>
 
-            <a href="support.html">Help Center</a>
-            <a href="support.html#contact">Contact Us</a>
+            <a href="community.html">
+                Community
+            </a>
+
+            <a href="support.html">
+                Help Center
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="register.html">
+                Register
+            </a>
 
         </div>
 
@@ -687,8 +846,10 @@
         <div class="container">
 
             <p>
-                © <span class="current-year"></span>
-                Molescreativivity. All rights reserved.
+                ©
+                <span class="current-year"></span>
+                Molescreativivity.
+                All rights reserved.
             </p>
 
         </div>
