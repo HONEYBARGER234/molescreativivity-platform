@@ -1,327 +1,353 @@
-/* =========================================================
-   MOLESCREATIVITY PLATFORM
-   GLOBAL JAVASCRIPT
-========================================================= */
+// ========================================
+// MOLESCREATIVITY PLATFORM
+// MAIN JAVASCRIPT
+// ========================================
+
+// ---------- SUPABASE ----------
+const SUPABASE_URL = "https://mbhhocnhydwcdxghfnry.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_LR2biq1vtXsFOyx-AWMLXA_OTUq3DKn";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
-/* =========================================================
-   MOBILE MENU
-========================================================= */
+// ---------- PAGE READY ----------
+document.addEventListener("DOMContentLoaded", function () {
 
-function toggleMenu() {
-    const nav = document.getElementById("mainNav");
+    console.log("Molescreativivity Platform loaded");
 
-    if (!nav) return;
+    // Mobile menu
+    const menuButton = document.querySelector(".menu-btn");
+    const navMenu = document.querySelector(".nav-menu");
 
-    nav.classList.toggle("active");
-}
-
-
-/* Close mobile menu when a link is clicked */
-
-document.addEventListener("click", function (event) {
-
-    const nav = document.getElementById("mainNav");
-    const menuButton = document.querySelector(".menu-toggle");
-
-    if (!nav) return;
-
-    if (
-        nav.classList.contains("active") &&
-        !nav.contains(event.target) &&
-        !menuButton?.contains(event.target)
-    ) {
-        nav.classList.remove("active");
+    if (menuButton && navMenu) {
+        menuButton.addEventListener("click", function () {
+            navMenu.classList.toggle("active");
+        });
     }
 
-});
+    // Close mobile menu after clicking a link
+    const navLinks = document.querySelectorAll(".nav-menu a");
 
-
-/* =========================================================
-   CURRENT YEAR
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    document
-        .querySelectorAll(".current-year")
-        .forEach(function (element) {
-
-            element.textContent =
-                new Date().getFullYear();
-
-        });
-
-});
-
-
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const revealElements =
-        document.querySelectorAll(".reveal");
-
-    if (!revealElements.length) return;
-
-    const observer =
-        new IntersectionObserver(
-            function (entries) {
-
-                entries.forEach(function (entry) {
-
-                    if (entry.isIntersecting) {
-
-                        entry.target.classList.add(
-                            "visible"
-                        );
-
-                        observer.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.12
+    navLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+            if (navMenu) {
+                navMenu.classList.remove("active");
             }
-        );
-
-    revealElements.forEach(function (element) {
-
-        observer.observe(element);
-
+        });
     });
 
 });
 
 
-/* =========================================================
-   DEMO BUTTONS
-========================================================= */
+// ========================================
+// SUPABASE AUTHENTICATION
+// ========================================
 
-document.addEventListener("DOMContentLoaded", function () {
+// Get logged-in user
+async function getCurrentUser() {
 
-    document
-        .querySelectorAll("[data-demo]")
-        .forEach(function (button) {
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
 
-            button.addEventListener("click", function () {
+    if (error) {
+        console.error("User error:", error);
+        return null;
+    }
 
-                const message =
-                    button.getAttribute("data-demo");
-
-                alert(
-                    message ||
-                    "This feature will be connected when the platform backend is added."
-                );
-
-            });
-
-        });
-
-});
+    return user;
+}
 
 
-/* =========================================================
-   PASSWORD VISIBILITY
-========================================================= */
+// Check if user is logged in
+async function checkLogin() {
 
-function togglePassword(inputId, button) {
+    const user = await getCurrentUser();
 
-    const input =
-        document.getElementById(inputId);
+    if (!user) {
+        window.location.href = "login.html";
+        return null;
+    }
 
-    if (!input) return;
+    return user;
+}
 
-    if (input.type === "password") {
 
-        input.type = "text";
+// Logout
+async function logoutUser() {
 
-        if (button) {
-            button.textContent = "🙈";
-        }
+    const { error } = await supabaseClient.auth.signOut();
 
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    window.location.href = "login.html";
+}
+
+
+// ========================================
+// AUTH STATE
+// ========================================
+
+supabaseClient.auth.onAuthStateChange(function (event, session) {
+
+    console.log("Authentication:", event);
+
+    if (session) {
+        console.log("Logged in:", session.user.email);
     } else {
-
-        input.type = "password";
-
-        if (button) {
-            button.textContent = "👁";
-        }
-
+        console.log("Not logged in");
     }
 
-}
+});
 
 
-/* =========================================================
-   SIMPLE SEARCH
-========================================================= */
-
-function platformSearch(inputId, itemsSelector) {
-
-    const input =
-        document.getElementById(inputId);
-
-    const items =
-        document.querySelectorAll(itemsSelector);
-
-    if (!input || !items.length) return;
-
-    input.addEventListener("input", function () {
-
-        const search =
-            input.value
-                .toLowerCase()
-                .trim();
-
-        items.forEach(function (item) {
-
-            const text =
-                item.textContent
-                    .toLowerCase();
-
-            if (
-                text.includes(search)
-            ) {
-
-                item.style.display = "";
-
-            } else {
-
-                item.style.display = "none";
-
-            }
-
-        });
-
-    });
-
-}
-
-
-/* =========================================================
-   SMOOTH ANCHOR LINKS
-========================================================= */
+// ========================================
+// LOGOUT BUTTONS
+// ========================================
 
 document.addEventListener("click", function (event) {
 
-    const link =
-        event.target.closest(
-            'a[href^="#"]'
-        );
+    const logoutButton = event.target.closest(
+        ".logout-btn, [data-action='logout']"
+    );
 
-    if (!link) return;
+    if (logoutButton) {
+        event.preventDefault();
+        logoutUser();
+    }
 
-    const targetId =
-        link.getAttribute("href");
+});
 
-    if (
-        !targetId ||
-        targetId === "#"
-    ) return;
 
-    const target =
-        document.querySelector(targetId);
+// ========================================
+// REGISTER
+// ========================================
 
-    if (!target) return;
+async function registerUser(
+    firstName,
+    lastName,
+    email,
+    username,
+    password
+) {
+
+    const { data, error } = await supabaseClient.auth.signUp({
+
+        email: email,
+        password: password,
+
+        options: {
+            data: {
+                first_name: firstName,
+                last_name: lastName,
+                username: username
+            }
+        }
+
+    });
+
+    if (error) {
+        throw error;
+    }
+
+    return data;
+}
+
+
+// ========================================
+// LOGIN
+// ========================================
+
+async function loginUser(email, password) {
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+
+            email: email,
+            password: password
+
+        });
+
+    if (error) {
+        throw error;
+    }
+
+    return data;
+}
+
+
+// ========================================
+// REGISTER FORM
+// ========================================
+
+async function registerDemo(event) {
 
     event.preventDefault();
 
-    target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+    const firstName =
+        document.getElementById("firstName")?.value.trim();
+
+    const lastName =
+        document.getElementById("lastName")?.value.trim();
+
+    const email =
+        document.getElementById("email")?.value.trim();
+
+    const username =
+        document.getElementById("username")?.value.trim();
+
+    const password =
+        document.getElementById("password")?.value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword")?.value;
+
+    if (
+        !firstName ||
+        !lastName ||
+        !email ||
+        !username ||
+        !password
+    ) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    if (password.length < 6) {
+        alert("Password must be at least 6 characters.");
+        return;
+    }
+
+    try {
+
+        const data = await registerUser(
+            firstName,
+            lastName,
+            email,
+            username,
+            password
+        );
+
+        console.log("Registration successful:", data);
+
+        alert(
+            "Account created successfully! Check your email if verification is required."
+        );
+
+        window.location.href = "login.html";
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Registration failed: " + error.message
+        );
+
+    }
+
+}
+
+
+// ========================================
+// LOGIN FORM
+// ========================================
+
+async function loginDemo(event) {
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("email")?.value.trim();
+
+    const password =
+        document.getElementById("password")?.value;
+
+    if (!email || !password) {
+        alert("Please enter your email and password.");
+        return;
+    }
+
+    try {
+
+        await loginUser(email, password);
+
+        alert("Login successful!");
+
+        window.location.href = "dashboard.html";
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Login failed: " + error.message
+        );
+
+    }
+
+}
+
+
+// ========================================
+// PROTECT DASHBOARD
+// ========================================
+
+async function protectDashboard() {
+
+    const user = await getCurrentUser();
+
+    if (!user) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    console.log("Dashboard user:", user.email);
+
+}
+
+
+// ========================================
+// DISPLAY USER EMAIL
+// ========================================
+
+async function displayUserEmail() {
+
+    const user = await getCurrentUser();
+
+    if (!user) {
+        return;
+    }
+
+    const elements =
+        document.querySelectorAll("[data-user-email]");
+
+    elements.forEach(function (element) {
+        element.textContent = user.email;
     });
 
-});
+}
 
 
-/* =========================================================
-   ACTIVE PAGE NAVIGATION
-========================================================= */
+// ========================================
+// INITIALIZE
+// ========================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const currentPage =
-        window.location.pathname
-            .split("/")
-            .pop() || "index.html";
-
-    document
-        .querySelectorAll(".nav a")
-        .forEach(function (link) {
-
-            const linkPage =
-                link
-                    .getAttribute("href")
-                    ?.split("/")
-                    .pop();
-
-            if (
-                linkPage === currentPage
-            ) {
-
-                link.classList.add("active");
-
-            }
-
-        });
+    displayUserEmail();
 
 });
-
-
-/* =========================================================
-   DEMO WALLET
-========================================================= */
-
-function showWalletDemo() {
-
-    alert(
-        "Wallet system ready for backend integration. " +
-        "Payment gateway and transaction processing will be connected later."
-    );
-
-}
-
-
-/* =========================================================
-   DEMO PURCHASE
-========================================================= */
-
-function showPurchaseDemo(product) {
-
-    alert(
-        "Purchase selected: " +
-        (product || "Digital Product") +
-        "\n\nCheckout functionality will be connected when the backend and payment system are added."
-    );
-
-}
-
-
-/* =========================================================
-   DEMO SUPPORT
-========================================================= */
-
-function showSupportMessage() {
-
-    alert(
-        "Support messaging will be connected to the Molescreativivity support system later."
-    );
-
-}
-
-
-/* =========================================================
-   PLATFORM READY MESSAGE
-========================================================= */
-
-console.log(
-    "Molescreativivity Platform loaded successfully."
-);
