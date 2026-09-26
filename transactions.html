@@ -1,1 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Transactions — Molescreativivity</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .dashboard-page {
+            padding: 80px 7%;
+            min-height: 70vh;
+        }
+
+        .dashboard-heading {
+            margin-bottom: 35px;
+        }
+
+        .dashboard-heading span {
+            color: #a78bfa;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .dashboard-heading h1 {
+            font-size: clamp(38px, 5vw, 60px);
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-top: 12px;
+        }
+
+        .dashboard-heading p {
+            color: #9298a8;
+            margin-top: 12px;
+        }
+
+        .transaction-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .transaction-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            padding: 24px;
+            background: #11131b;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+        }
+
+        .summary-card small {
+            color: #9298a8;
+            font-size: 11px;
+        }
+
+        .summary-card h2 {
+            margin-top: 8px;
+            font-size: 25px;
+        }
+
+        .transactions-box {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            background: #11131b;
+            overflow: hidden;
+        }
+
+        .transactions-header,
+        .transaction-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .transactions-header {
+            padding: 18px 24px;
+            color: #777e90;
+            font-size: 11px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .transaction-row {
+            padding: 21px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .transaction-row:last-child {
+            border-bottom: 0;
+        }
+
+        .transaction-name {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(139,92,246,0.12);
+        }
+
+        .transaction-name h3 {
+            font-size: 13px;
+        }
+
+        .transaction-name p {
+            color: #777e90;
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        .transaction-row > div:not(.transaction-name) {
+            color: #b8bdc9;
+            font-size: 12px;
+        }
+
+        .status {
+            display: inline-flex;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            background: rgba(255,255,255,0.05);
+            color: #aeb4c1;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .empty-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            background: rgba(139,92,246,0.1);
+            font-size: 25px;
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+        }
+
+        .empty-state p {
+            max-width: 400px;
+            margin: 8px auto 20px;
+            color: #777e90;
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+
+            .dashboard-page {
+                padding: 65px 5%;
+            }
+
+            .transaction-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .transactions-header {
+                display: none;
+            }
+
+            .transaction-row {
+                grid-template-columns: 1fr 1fr;
+                padding: 20px;
+            }
+
+            .transaction-name {
+                grid-column: 1 / -1;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <a href="index.html" class="logo">
+        <span class="logo-mark">M</span>
+        <span>Molescreativivity</span>
+    </a>
+
+
+    <nav class="desktop-nav">
+
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="services.html">Services</a>
+        <a href="community.html">Community</a>
+        <a href="support.html">Support</a>
+
+    </nav>
+
+
+    <div class="header-actions">
+
+        <a href="login.html" class="login-btn">Login</a>
+        <a href="register.html" class="signup-btn">Get Started</a>
+
+    </div>
+
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+</header>
+
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="index.html">Home</a>
+    <a href="marketplace.html">Marketplace</a>
+    <a href="services.html">Services</a>
+    <a href="wallet.html">Wallet</a>
+    <a href="transactions.html">Transactions</a>
+    <a href="purchases.html">My Purchases</a>
+    <a href="referrals.html">Referrals</a>
+    <a href="community.html">Community</a>
+    <a href="support.html">Support</a>
+
+    <div class="mobile-auth">
+
+        <a href="login.html">Login</a>
+        <a href="register.html">Create Account</a>
+
+    </div>
+
+</div>
+
+
+<main>
+
+<section class="dashboard-page">
+
+
+    <div class="dashboard-heading">
+
+        <span>ACCOUNT ACTIVITY</span>
+
+        <h1>
+            Transactions<span style="color:#a78bfa;">.</span>
+        </h1>
+
+        <p>
+            Keep track of wallet activity, deposits and purchases.
+        </p>
+
+    </div>
+
+
+    <div class="transaction-summary">
+
+
+        <div class="summary-card">
+
+            <small>TOTAL DEPOSITS</small>
+
+            <h2>₦0.00</h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <small>TOTAL SPENDING</small>
+
+            <h2>₦0.00</h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <small>TRANSACTIONS</small>
+
+            <h2>0</h2>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="transactions-box">
+
+
+        <div class="transactions-header">
+
+            <div>TRANSACTION</div>
+            <div>AMOUNT</div>
+            <div>DATE</div>
+            <div>STATUS</div>
+
+        </div>
+
+
+        <!-- SAMPLE STRUCTURE
+        Real transactions will eventually
+        be loaded from the database.
+        -->
+
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                📊
+            </div>
+
+            <h3>No transactions yet</h3>
+
+            <p>
+                Your deposits, purchases and other wallet activity
+                will appear here once your account begins using
+                the platform.
+            </p>
+
+            <a href="wallet.html" class="primary-btn">
+                Open Wallet →
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-main">
+
+
+        <div class="footer-brand">
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-mark">M</span>
+
+                <span>Molescreativivity</span>
+
+            </a>
+
+            <p>
+                Creative services, digital solutions and more —
+                all in one platform.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Platform</h4>
+
+            <a href="marketplace.html">Marketplace</a>
+            <a href="services.html">Services</a>
+            <a href="wallet.html">Wallet</a>
+            <a href="transactions.html">Transactions</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Account</h4>
+
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="purchases.html">Purchases</a>
+            <a href="referrals.html">Referrals</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Help</h4>
+
+            <a href="support.html">Support</a>
+            <a href="community.html">Community</a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>© 2026 Molescreativivity.</span>
+
+        <span>Digital services & solutions.</span>
+
+    </div>
+
+</footer>
+
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
+
+Save/commit it.
+
+After this, we'll create "purchases.html", then "referrals.html", and after that we'll build the login/register system.
