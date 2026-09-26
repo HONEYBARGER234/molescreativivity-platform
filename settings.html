@@ -1,1 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Account Settings | Molescreativivity</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .settings-page {
+            padding: 50px 20px 80px;
+        }
+
+        .settings-heading {
+            margin-bottom: 30px;
+        }
+
+        .settings-heading h1 {
+            font-size: clamp(34px, 5vw, 48px);
+            margin: 10px 0;
+        }
+
+        .settings-heading h1 span {
+            color: var(--primary-light);
+        }
+
+        .settings-heading p {
+            color: var(--muted);
+        }
+
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .settings-menu {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 12px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .settings-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 14px;
+            border-radius: 12px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 4px;
+            transition: .2s ease;
+        }
+
+        .settings-menu a:hover,
+        .settings-menu a.active {
+            color: var(--text);
+            background: rgba(139,92,246,.12);
+        }
+
+        .settings-menu a.active {
+            border-left: 3px solid var(--primary);
+        }
+
+        .settings-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .settings-section h2 {
+            margin: 0 0 7px;
+            font-size: 21px;
+        }
+
+        .settings-section > p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 0;
+            line-height: 1.6;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin: 25px 0;
+        }
+
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            font-weight: 800;
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                var(--accent)
+            );
+        }
+
+        .profile-header strong {
+            display: block;
+            font-size: 18px;
+        }
+
+        .profile-header span {
+            display: block;
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .settings-form {
+            display: grid;
+            gap: 18px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg-soft);
+            color: var(--text);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139,92,246,.12);
+        }
+
+        .save-btn {
+            width: fit-content;
+            margin-top: 5px;
+        }
+
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .setting-row:last-child {
+            border-bottom: 0;
+        }
+
+        .setting-info strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .setting-info span {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .toggle {
+            width: 48px;
+            height: 26px;
+            border-radius: 20px;
+            border: 0;
+            background: #292c36;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            transition: .2s ease;
+        }
+
+        .toggle::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            left: 3px;
+            top: 3px;
+            transition: .2s ease;
+        }
+
+        .toggle.active {
+            background: var(--primary);
+        }
+
+        .toggle.active::after {
+            left: 25px;
+        }
+
+        .danger-zone {
+            border-color: rgba(239,68,68,.2);
+        }
+
+        .danger-zone h2 {
+            color: #ff8585;
+        }
+
+        .danger-button {
+            border: 1px solid rgba(239,68,68,.25);
+            background: rgba(239,68,68,.08);
+            color: #ff8585;
+            padding: 12px 17px;
+            border-radius: 11px;
+            cursor: pointer;
+        }
+
+        .settings-notice {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 800px) {
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-menu {
+                position: static;
+                display: flex;
+                overflow-x: auto;
+                gap: 5px;
+            }
+
+            .settings-menu a {
+                white-space: nowrap;
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .settings-section {
+                padding: 22px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .setting-row {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="container nav-container">
+
+        <a href="index.html" class="logo">
+            <span class="logo-mark">M</span>
+            <span>Molescreativivity</span>
+        </a>
+
+        <nav class="nav" id="mainNav">
+
+            <a href="index.html">Home</a>
+            <a href="marketplace.html">Marketplace</a>
+            <a href="services.html">Services</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="community.html">Community</a>
+            <a href="support.html">Support</a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <a href="dashboard.html" class="btn btn-outline">
+                Dashboard
+            </a>
+
+        </div>
+
+        <button class="menu-toggle" onclick="toggleMenu()">
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="settings-page">
+
+    <div class="container">
+
+        <div class="settings-heading">
+
+            <span class="eyebrow">
+                ACCOUNT
+            </span>
+
+            <h1>
+                Account <span>Settings</span>
+            </h1>
+
+            <p>
+                Manage your profile, preferences and account options.
+            </p>
+
+        </div>
+
+
+        <div class="settings-layout">
+
+            <!-- SETTINGS MENU -->
+
+            <aside class="settings-menu">
+
+                <a href="#profile" class="active">
+                    👤 Profile
+                </a>
+
+                <a href="#preferences">
+                    ⚙️ Preferences
+                </a>
+
+                <a href="#notifications">
+                    🔔 Notifications
+                </a>
+
+                <a href="#security">
+                    🔐 Security
+                </a>
+
+                <a href="#danger">
+                    ⚠️ Account
+                </a>
+
+            </aside>
+
+
+            <!-- SETTINGS CONTENT -->
+
+            <div>
+
+                <!-- PROFILE -->
+
+                <section
+                    class="settings-section"
+                    id="profile"
+                >
+
+                    <h2>
+                        Profile Information
+                    </h2>
+
+                    <p>
+                        Update the information associated with
+                        your Molescreativivity account.
+                    </p>
+
+
+                    <div class="profile-header">
+
+                        <div class="profile-avatar">
+                            M
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Molescreativivity User
+                            </strong>
+
+                            <span>
+                                Digital platform member
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        class="settings-form"
+                        onsubmit="saveProfile(event)"
+                    >
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="firstName">
+                                    First Name
+                                </label>
+
+                                <input
+                                    id="firstName"
+                                    type="text"
+                                    placeholder="First name"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="lastName">
+                                    Last Name
+                                </label>
+
+                                <input
+                                    id="lastName"
+                                    type="text"
+                                    placeholder="Last name"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="username">
+                                Username
+                            </label>
+
+                            <input
+                                id="username"
+                                type="text"
+                                placeholder="@username"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="you@example.com"
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary save-btn"
+                        >
+                            Save Changes
+                        </button>
+
+                    </form>
+
+                </section>
+
+
+                <!-- PREFERENCES -->
+
+                <section
+                    class="settings-section"
+                    id="preferences"
+                >
+
+                    <h2>
+                        Preferences
+                    </h2>
+
+                    <p>
+                        Customize how the platform behaves for you.
+                    </p>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Dark Interface
+                            </strong>
+
+                            <span>
+                                Keep the platform in its
+                                premium dark appearance.
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="toggle active"
+                            onclick="toggleSetting(this)"
+                            aria-label="Toggle dark interface"
+                        ></button>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Compact Dashboard
+                            </strong>
+
+                            <span>
+                                Use a more compact layout for
+                                dashboard information.
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="toggle"
+                            onclick="toggleSetting(this)"
+                            aria-label="Toggle compact dashboard"
+                        ></button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- NOTIFICATIONS -->
+
+                <section
+                    class="settings-section"
+                    id="notifications"
+                >
+
+                    <h2>
+                        Notifications
+                    </h2>
+
+                    <p>
+                        Choose which notifications you want to receive.
+                    </p>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Email Notifications
+                            </strong>
+
+                            <span>
+                                Receive important account updates
+                                by email.
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="toggle active"
+                            onclick="toggleSetting(this)"
+                            aria-label="Toggle email notifications"
+                        ></button>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Purchase Updates
+                            </strong>
+
+                            <span>
+                                Get notified about purchase
+                                and order updates.
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="toggle active"
+                            onclick="toggleSetting(this)"
+                            aria-label="Toggle purchase updates"
+                        ></button>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Community Notifications
+                            </strong>
+
+                            <span>
+                                Receive updates about community
+                                activity.
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="toggle"
+                            onclick="toggleSetting(this)"
+                            aria-label="Toggle community notifications"
+                        ></button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SECURITY -->
+
+                <section
+                    class="settings-section"
+                    id="security"
+                >
+
+                    <h2>
+                        Security
+                    </h2>
+
+                    <p>
+                        Security controls for your account.
+                    </p>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Change Password
+                            </strong>
+
+                            <span>
+                                Update your account password.
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="btn btn-outline"
+                            onclick="demoAction('Password change')"
+                        >
+                            Change
+                        </button>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Two-Factor Authentication
+                            </strong>
+
+                            <span>
+                                Add an additional layer of account
+                                protection.
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="toggle"
+                            onclick="toggleSetting(this)"
+                            aria-label="Toggle two factor authentication"
+                        ></button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- DANGER -->
+
+                <section
+                    class="settings-section danger-zone"
+                    id="danger"
+                >
+
+                    <h2>
+                        Account Management
+                    </h2>
+
+                    <p>
+                        These actions affect your account.
+                    </p>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Log Out
+                            </strong>
+
+                            <span>
+                                End your current platform session.
+                            </span>
+
+                        </div>
+
+                        <a
+                            href="login.html"
+                            class="btn btn-outline"
+                        >
+                            Log Out
+                        </a>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Delete Account
+                            </strong>
+
+                            <span>
+                                Permanently remove your account
+                                after the real backend is connected.
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="danger-button"
+                            onclick="demoAction('Account deletion')"
+                        >
+                            Delete
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- NOTICE -->
+
+                <section class="platform-notice settings-notice">
+
+                    <div class="notice-icon">
+                        ℹ️
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Settings are currently in demo mode
+                        </h3>
+
+                        <p>
+                            These controls demonstrate the final
+                            interface. Permanent profile changes,
+                            authentication, security settings and
+                            account management will be connected
+                            through the backend later.
+                        </p>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+        <div>
+
+            <a href="index.html" class="logo">
+                <span class="logo-mark">M</span>
+                <span>Molescreativivity</span>
+            </a>
+
+            <p>
+                Digital creativity, services and solutions
+                built for modern creators and businesses.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4>Platform</h4>
+
+            <a href="marketplace.html">Marketplace</a>
+            <a href="services.html">Services</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="community.html">Community</a>
+
+        </div>
+
+
+        <div>
+
+            <h4>Account</h4>
+
+            <a href="dashboard.html">Dashboard</a>
+            <a href="wallet.html">Wallet</a>
+            <a href="referrals.html">Referrals</a>
+            <a href="settings.html">Settings</a>
+
+        </div>
+
+
+        <div>
+
+            <h4>Support</h4>
+
+            <a href="support.html">Help Center</a>
+            <a href="support.html#contact">Contact Us</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <div class="container">
+
+            <p>
+                © <span class="current-year"></span>
+                Molescreativivity. All rights reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= SCRIPT ================= -->
+
+<script src="js/script.js"></script>
+
+<script>
+
+function toggleSetting(button) {
+    button.classList.toggle("active");
+}
+
+
+function saveProfile(event) {
+
+    event.preventDefault();
+
+    alert(
+        "Profile changes saved in demo mode. " +
+        "Permanent account storage will be connected later."
+    );
+
+}
+
+
+function demoAction(action) {
+
+    alert(
+        action +
+        " is currently available as a frontend demonstration. " +
+        "Backend functionality will be connected later."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
