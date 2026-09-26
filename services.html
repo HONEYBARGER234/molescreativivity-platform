@@ -4,293 +4,850 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Services — Molescreativivity</title>
+    <meta
+        name="description"
+        content="Molescreativivity digital services — graphic design, websites, branding and digital solutions."
+    >
+
+    <title>Services | Molescreativivity</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .services-page {
+            padding: 65px 0 90px;
+        }
+
+        .services-hero {
+            max-width: 800px;
+            margin: 0 auto 55px;
+            text-align: center;
+        }
+
+        .services-hero h1 {
+            margin: 18px 0;
+            font-size: clamp(40px, 6vw, 62px);
+            line-height: 1.05;
+            letter-spacing: -2px;
+        }
+
+        .services-hero h1 span {
+            color: var(--primary-light);
+        }
+
+        .services-hero p {
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        .services-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .big-service {
+            display: grid;
+            grid-template-columns: 90px 1fr auto;
+            gap: 25px;
+            align-items: center;
+
+            padding: 30px;
+
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+
+            transition: .25s ease;
+        }
+
+        .big-service:hover {
+            background: var(--card-hover);
+            border-color: rgba(139,92,246,.3);
+            transform: translateY(-3px);
+        }
+
+        .big-service-icon {
+            width: 75px;
+            height: 75px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 20px;
+
+            font-size: 34px;
+
+            background: rgba(139,92,246,.1);
+            border: 1px solid rgba(139,92,246,.18);
+        }
+
+        .big-service h2 {
+            font-size: 23px;
+            margin-bottom: 7px;
+        }
+
+        .big-service p {
+            color: var(--muted);
+            font-size: 13px;
+            max-width: 650px;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 13px;
+        }
+
+        .service-tags span {
+            padding: 5px 9px;
+            border-radius: 7px;
+            background: rgba(255,255,255,.04);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .custom-box {
+            margin-top: 60px;
+            padding: 45px 30px;
+            text-align: center;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(139,92,246,.12),
+                    rgba(34,211,238,.04)
+                );
+
+            border: 1px solid rgba(139,92,246,.2);
+        }
+
+        .custom-box h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .custom-box p {
+            max-width: 620px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .custom-box .btn {
+            margin-top: 23px;
+        }
+
+        .process-section {
+            margin-top: 80px;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 18px;
+        }
+
+        .process-card {
+            position: relative;
+            padding: 27px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+        }
+
+        .process-number {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background: rgba(139,92,246,.12);
+            color: var(--primary-light);
+
+            font-weight: 800;
+            font-size: 13px;
+
+            margin-bottom: 18px;
+        }
+
+        .process-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .process-card p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+
+            .big-service {
+                grid-template-columns: 65px 1fr;
+            }
+
+            .big-service .btn {
+                grid-column: 2;
+                width: fit-content;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .big-service {
+                grid-template-columns: 1fr;
+            }
+
+            .big-service .btn {
+                grid-column: auto;
+                width: 100%;
+            }
+
+            .big-service-icon {
+                width: 62px;
+                height: 62px;
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header class="header">
 
-    <a href="index.html" class="logo">
-        <span class="logo-mark">M</span>
-        <span>Molescreativivity</span>
-    </a>
+    <div class="container nav-container">
 
-    <nav class="desktop-nav">
-        <a href="index.html">Home</a>
-        <a href="marketplace.html">Marketplace</a>
-        <a href="services.html" class="active">Services</a>
-        <a href="community.html">Community</a>
-        <a href="support.html">Support</a>
-    </nav>
+        <a href="index.html" class="logo">
+            <span class="logo-mark">M</span>
+            <span>Molescreativivity</span>
+        </a>
 
-    <div class="header-actions">
-        <a href="login.html" class="login-btn">Login</a>
-        <a href="register.html" class="signup-btn">Get Started</a>
+        <nav class="nav" id="mainNav">
+
+            <a href="index.html">Home</a>
+
+            <a href="marketplace.html">
+                Marketplace
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="community.html">
+                Community
+            </a>
+
+            <a href="support.html">
+                Support
+            </a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <a
+                href="login.html"
+                class="btn btn-outline"
+            >
+                Login
+            </a>
+
+            <a
+                href="register.html"
+                class="btn btn-primary"
+            >
+                Get Started
+            </a>
+
+        </div>
+
+        <button
+            class="menu-toggle"
+            onclick="toggleMenu()"
+        >
+            ☰
+        </button>
+
     </div>
-
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
 </header>
 
 
-<div class="mobile-menu" id="mobileMenu">
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
-    <a href="index.html">Home</a>
-    <a href="marketplace.html">Marketplace</a>
-    <a href="services.html">Services</a>
-    <a href="wallet.html">Wallet</a>
-    <a href="transactions.html">Transactions</a>
-    <a href="purchases.html">My Purchases</a>
-    <a href="referrals.html">Referrals</a>
-    <a href="community.html">Community</a>
-    <a href="support.html">Support</a>
+<main class="services-page">
 
-    <div class="mobile-auth">
-        <a href="login.html">Login</a>
-        <a href="register.html">Create Account</a>
-    </div>
-
-</div>
+    <div class="container">
 
 
-<main>
+        <!-- HERO -->
 
-<section class="features">
+        <section class="services-hero reveal">
 
-    <div class="section-heading">
+            <span class="eyebrow">
+                MOLESCREATIVITY SERVICES
+            </span>
 
-        <span>WHAT WE DO</span>
-
-        <h1>
-            Creative services
-            <strong>built for you.</strong>
-        </h1>
-
-        <p>
-            From eye-catching graphics to complete websites,
-            Molescreativivity helps businesses, creators and individuals
-            build a stronger digital presence.
-        </p>
-
-    </div>
-
-
-    <div class="feature-grid">
-
-        <div class="feature-card">
-
-            <div class="feature-icon">🎨</div>
-
-            <h3>Graphic Design</h3>
+            <h1>
+                Let's build something
+                <span>great.</span>
+            </h1>
 
             <p>
-                Flyers, posters, social media designs, adverts,
-                business graphics and promotional materials.
+                Professional digital services for businesses,
+                creators, brands and individuals who want to
+                build a stronger online presence.
             </p>
 
-            <span>Request a design →</span>
-
-        </div>
+        </section>
 
 
-        <div class="feature-card">
+        <!-- SERVICES -->
 
-            <div class="feature-icon">🌐</div>
+        <section class="services-list">
 
-            <h3>Website Creation</h3>
+
+            <!-- GRAPHIC DESIGN -->
+
+            <article class="big-service reveal">
+
+                <div class="big-service-icon">
+                    🎨
+                </div>
+
+                <div>
+
+                    <h2>
+                        Graphic Design
+                    </h2>
+
+                    <p>
+                        Turn your ideas into clean,
+                        professional visuals that grab
+                        attention and communicate your message.
+                    </p>
+
+                    <div class="service-tags">
+
+                        <span>
+                            Flyers
+                        </span>
+
+                        <span>
+                            Posters
+                        </span>
+
+                        <span>
+                            Social Media
+                        </span>
+
+                        <span>
+                            Promotions
+                        </span>
+
+                        <span>
+                            Event Designs
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <a
+                    href="support.html"
+                    class="btn btn-primary"
+                >
+                    Request Design
+                </a>
+
+            </article>
+
+
+            <!-- WEBSITE -->
+
+            <article class="big-service reveal">
+
+                <div class="big-service-icon">
+                    🌐
+                </div>
+
+                <div>
+
+                    <h2>
+                        Website Creation
+                    </h2>
+
+                    <p>
+                        Modern responsive websites designed
+                        to give your business or personal brand
+                        a professional presence online.
+                    </p>
+
+                    <div class="service-tags">
+
+                        <span>
+                            Business Websites
+                        </span>
+
+                        <span>
+                            Portfolio
+                        </span>
+
+                        <span>
+                            Landing Pages
+                        </span>
+
+                        <span>
+                            Online Stores
+                        </span>
+
+                        <span>
+                            Custom Websites
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <a
+                    href="support.html"
+                    class="btn btn-primary"
+                >
+                    Request Website
+                </a>
+
+            </article>
+
+
+            <!-- SOCIAL MEDIA -->
+
+            <article class="big-service reveal">
+
+                <div class="big-service-icon">
+                    📱
+                </div>
+
+                <div>
+
+                    <h2>
+                        Social Media Design
+                    </h2>
+
+                    <p>
+                        Create a consistent and attractive
+                        visual presence across your social
+                        media platforms.
+                    </p>
+
+                    <div class="service-tags">
+
+                        <span>
+                            Instagram
+                        </span>
+
+                        <span>
+                            TikTok
+                        </span>
+
+                        <span>
+                            Facebook
+                        </span>
+
+                        <span>
+                            X
+                        </span>
+
+                        <span>
+                            Promotional Posts
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <a
+                    href="support.html"
+                    class="btn btn-primary"
+                >
+                    Get Started
+                </a>
+
+            </article>
+
+
+            <!-- BRANDING -->
+
+            <article class="big-service reveal">
+
+                <div class="big-service-icon">
+                    ✨
+                </div>
+
+                <div>
+
+                    <h2>
+                        Brand Identity
+                    </h2>
+
+                    <p>
+                        Build a recognizable visual identity
+                        that makes your business look consistent
+                        and professional.
+                    </p>
+
+                    <div class="service-tags">
+
+                        <span>
+                            Logos
+                        </span>
+
+                        <span>
+                            Brand Colors
+                        </span>
+
+                        <span>
+                            Typography
+                        </span>
+
+                        <span>
+                            Brand Assets
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <a
+                    href="support.html"
+                    class="btn btn-primary"
+                >
+                    Start Branding
+                </a>
+
+            </article>
+
+
+            <!-- DIGITAL SOLUTIONS -->
+
+            <article class="big-service reveal">
+
+                <div class="big-service-icon">
+                    🚀
+                </div>
+
+                <div>
+
+                    <h2>
+                        Digital Solutions
+                    </h2>
+
+                    <p>
+                        Need something outside the services
+                        listed here? Tell us what you want to
+                        build and we'll work from the idea.
+                    </p>
+
+                    <div class="service-tags">
+
+                        <span>
+                            Digital Projects
+                        </span>
+
+                        <span>
+                            Online Solutions
+                        </span>
+
+                        <span>
+                            Custom Requests
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <a
+                    href="support.html"
+                    class="btn btn-primary"
+                >
+                    Discuss Project
+                </a>
+
+            </article>
+
+
+        </section>
+
+
+        <!-- CUSTOM REQUEST -->
+
+        <section class="custom-box reveal">
+
+            <span class="eyebrow">
+                CUSTOM PROJECT?
+            </span>
+
+            <h2>
+                Have an idea that isn't listed?
+            </h2>
 
             <p>
-                Modern responsive websites for businesses,
-                brands, creators and personal projects.
+                No problem. Send the details of what you want
+                to create and we'll figure out the best digital
+                solution for it.
             </p>
 
-            <span>Build a website →</span>
+            <a
+                href="support.html"
+                class="btn btn-primary"
+            >
+                Tell Us About It →
+            </a>
 
-        </div>
-
-
-        <div class="feature-card">
-
-            <div class="feature-icon">📱</div>
-
-            <h3>Social Media Design</h3>
-
-            <p>
-                Content graphics created to make your social
-                media pages look more professional.
-            </p>
-
-            <span>Get started →</span>
-
-        </div>
+        </section>
 
 
-        <div class="feature-card">
+        <!-- PROCESS -->
 
-            <div class="feature-icon">✨</div>
+        <section class="process-section">
 
-            <h3>Brand Identity</h3>
+            <div class="section-heading center reveal">
 
-            <p>
-                Logos, visual direction and branded materials
-                for businesses and personal brands.
-            </p>
+                <span class="eyebrow">
+                    HOW IT WORKS
+                </span>
 
-            <span>Build your brand →</span>
+                <h2>
+                    From idea to finished project.
+                </h2>
 
-        </div>
+                <p>
+                    A simple process keeps every project clear
+                    from the beginning.
+                </p>
 
-    </div>
-
-</section>
-
-
-<section class="services-preview">
-
-    <div class="services-text">
-
-        <span class="section-label">HOW IT WORKS</span>
-
-        <h2>
-            Simple.
-            <span>Professional.</span>
-        </h2>
-
-        <p>
-            Tell us what you need, choose your service and
-            we'll work toward delivering a solution that fits
-            your project.
-        </p>
-
-        <a href="support.html" class="primary-btn">
-            Contact Us →
-        </a>
-
-    </div>
+            </div>
 
 
-    <div class="service-list">
+            <div class="process-grid">
 
-        <div class="service-item">
 
-            <span>01</span>
+                <div class="process-card reveal">
+
+                    <div class="process-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Tell us what you need
+                    </h3>
+
+                    <p>
+                        Share your idea, requirements,
+                        references and project details.
+                    </p>
+
+                </div>
+
+
+                <div class="process-card reveal">
+
+                    <div class="process-number">
+                        02
+                    </div>
+
+                    <h3>
+                        We build it
+                    </h3>
+
+                    <p>
+                        Your project is designed and developed
+                        according to the agreed requirements.
+                    </p>
+
+                </div>
+
+
+                <div class="process-card reveal">
+
+                    <div class="process-number">
+                        03
+                    </div>
+
+                    <h3>
+                        You receive the result
+                    </h3>
+
+                    <p>
+                        Review the finished work and receive
+                        the final project or digital assets.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- NOTICE -->
+
+        <div
+            class="platform-notice"
+            style="margin-top:60px;"
+        >
+
+            <div class="notice-icon">
+                ℹ️
+            </div>
 
             <div>
-                <h3>Choose a Service</h3>
-                <p>Select the type of digital solution you need.</p>
+
+                <h3>
+                    Service requests are currently in demo mode
+                </h3>
+
+                <p>
+                    The service catalogue and request interface
+                    are ready. A real client-order system,
+                    payments, messaging and project tracking
+                    will be connected through the backend.
+                </p>
+
             </div>
 
         </div>
 
 
-        <div class="service-item">
-
-            <span>02</span>
-
-            <div>
-                <h3>Send Your Requirements</h3>
-                <p>Tell us about your project and expectations.</p>
-            </div>
-
-        </div>
-
-
-        <div class="service-item">
-
-            <span>03</span>
-
-            <div>
-                <h3>Get Your Solution</h3>
-                <p>We work on the project and deliver the agreed result.</p>
-            </div>
-
-        </div>
-
     </div>
-
-</section>
-
-
-<section class="cta">
-
-    <div>
-
-        <span>START A PROJECT</span>
-
-        <h2>
-            Let's create
-            something great.
-        </h2>
-
-        <p>
-            Ready to turn your idea into something people can see?
-        </p>
-
-        <a href="support.html" class="cta-btn">
-            Start a Project →
-        </a>
-
-    </div>
-
-</section>
 
 </main>
 
 
-<footer>
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-    <div class="footer-main">
+<footer class="footer">
 
-        <div class="footer-brand">
+    <div class="container footer-grid">
+
+        <div>
 
             <a href="index.html" class="logo">
-                <span class="logo-mark">M</span>
-                <span>Molescreativivity</span>
+
+                <span class="logo-mark">
+                    M
+                </span>
+
+                <span>
+                    Molescreativivity
+                </span>
+
             </a>
 
             <p>
-                Creative services, digital solutions and more —
-                all in one platform.
+                Digital creativity, services and solutions
+                for creators and businesses.
             </p>
 
         </div>
 
 
-        <div class="footer-column">
+        <div>
 
-            <h4>Platform</h4>
+            <h4>
+                Platform
+            </h4>
 
-            <a href="marketplace.html">Marketplace</a>
-            <a href="services.html">Services</a>
-            <a href="wallet.html">Wallet</a>
-            <a href="transactions.html">Transactions</a>
+            <a href="marketplace.html">
+                Marketplace
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="tools.html">
+                Tools
+            </a>
 
         </div>
 
 
-        <div class="footer-column">
+        <div>
 
-            <h4>Services</h4>
+            <h4>
+                Account
+            </h4>
 
-            <a href="services.html">Graphic Design</a>
-            <a href="services.html">Websites</a>
-            <a href="services.html">Social Media</a>
-            <a href="services.html">Branding</a>
+            <a href="wallet.html">
+                Wallet
+            </a>
+
+            <a href="purchases.html">
+                Purchases
+            </a>
+
+            <a href="referrals.html">
+                Referrals
+            </a>
+
+            <a href="settings.html">
+                Settings
+            </a>
 
         </div>
 
 
-        <div class="footer-column">
+        <div>
 
-            <h4>Account</h4>
+            <h4>
+                Support
+            </h4>
 
-            <a href="login.html">Login</a>
-            <a href="register.html">Register</a>
-            <a href="purchases.html">My Purchases</a>
-            <a href="support.html">Support</a>
+            <a href="community.html">
+                Community
+            </a>
+
+            <a href="support.html">
+                Help Center
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="register.html">
+                Register
+            </a>
 
         </div>
 
@@ -299,9 +856,16 @@
 
     <div class="footer-bottom">
 
-        <span>© 2026 Molescreativivity.</span>
+        <div class="container">
 
-        <span>Digital services & solutions.</span>
+            <p>
+                ©
+                <span class="current-year"></span>
+                Molescreativivity.
+                All rights reserved.
+            </p>
+
+        </div>
 
     </div>
 
@@ -312,7 +876,3 @@
 
 </body>
 </html>
-
-Save/commit it.
-
-After that, tell me “services done” and we'll move into the user dashboard side — Wallet, Purchases, Transactions and Referrals. That's where this starts feeling like a real platform rather than just a website.
